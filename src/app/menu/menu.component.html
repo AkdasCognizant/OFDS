@@ -1,0 +1,52 @@
+
+
+<!-- <br>
+<h3>{{restaurantName}}</h3>
+<h2 class="text-center">{{'Restaurant Menu' }}</h2>
+<div class="row mt-4" *ngIf="menuItems.length > 0; else noItems">
+    <div class="col-md-4 mb-4" *ngFor="let i of menuItems">
+        <div class="card h-100 shadow-sm">
+            <img [src]="i.image" class="card-img-top" alt="{{ i.name }}" *ngIf="i.image" />
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <h5 class="card-title">{{ i.name }}</h5>
+                    <p class="card-text">Price: ₹{{ i.price }}</p>
+                </div>
+                <button class="btn btn-success mt-3">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noItems>
+    <p class="text-muted text-center mt-4">No menu items available for this restaurant.</p>
+</ng-template> -->
+
+
+
+<h2 class="text-center">Restaurant Menu</h2>
+
+<div class="row mt-4" *ngIf="menuItems.length > 0; else noItems">
+  <div class="col-md-4 mb-4" *ngFor="let i of menuItems">
+    <div class="card h-100 shadow-sm">
+      <img [src]="i.imageUrl || i.image" class="card-img-top" alt="{{ i.name }}" *ngIf="i.image || i.imageUrl" />
+      <div class="card-body d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="card-title">{{ i.name }}</h5>
+          <p class="card-text">Price: ₹{{ i.price }}</p>
+        </div>
+        <button class="btn btn-success mt-3" (click)="addToCart(i)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mt-4" *ngIf="hasItemsInCart()">
+  <button class="btn btn-primary" (click)="proceedToCart()">Proceed to Cart</button>
+</div>
+
+<ng-template #noItems>
+  <p class="text-muted text-center mt-4">No menu items available for this restaurant.</p>
+</ng-template>
+
+

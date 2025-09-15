@@ -1,0 +1,416 @@
+{
+  "customers": [
+    {
+      "id": "37a1",
+      "name": "Akdas Sayyad",
+      "password": "akdas123",
+      "email": "akdas@gmail.com",
+      "phone": 9898989878
+    },
+    {
+      "id": "dc23",
+      "name": "Ganesh Talwekar",
+      "password": "ganesh123",
+      "email": "ganesh@gmail.com",
+      "phone": 8806158110
+    },
+    {
+      "id": "cced",
+      "name": "Parag Koli",
+      "password": "parag123",
+      "email": "parag@gmail.com",
+      "phone": 7890987876
+    },
+    {
+      "id": "7e62",
+      "name": "Juned Patel",
+      "password": "juned123",
+      "email": "juned@gmail.com",
+      "phone": 6789098789
+    },
+    {
+      "id": "cdcf",
+      "name": "Himanshu Nagose",
+      "password": "himanshu123",
+      "email": "himanshu@gmail.com",
+      "phone": 8909899879
+    },
+    {
+      "id": "68ce",
+      "name": "Charan",
+      "password": "charan123",
+      "email": "charan@gmail.com",
+      "phone": 7898789876
+    }
+  ],
+  "rlogin": [
+    {
+      "id": "r101",
+      "rname": "Shree Annapoorna",
+      "remail": "shreeannapoorna@gmail.com",
+      "rpassword": "sree123"
+    },
+    {
+      "id": "638b",
+      "rname": "Hotel Hari",
+      "oname": "Ravi Kumar",
+      "password": "ravi123",
+      "email": "ravi@gmail.com",
+      "phone": 7890987890,
+      "address": "Gandhipuram, Coimbatore",
+      "termsAccepted": true
+    },
+    {
+      "id": "2e75",
+      "rname": "Anna Idli",
+      "oname": "Raju",
+      "password": "raju123",
+      "email": "raju@gmail.com",
+      "phone": 7890989098,
+      "address": "Keeranatham , Coimbatore",
+      "termsAccepted": true
+    }
+  ],
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Shree Annapoorna",
+      "rating": 4.2,
+      "image": "restaurant1.jpg",
+      "cusine": "South_Indian"
+    },
+    {
+      "id": 2,
+      "name": "Hotel Hari ",
+      "rating": 4.1,
+      "image": "restaurant2.jpg",
+      "cusine": "Maharashtrian"
+    },
+    {
+      "id": 3,
+      "name": "Flavors of Fusion",
+      "rating": 4.5,
+      "image": "restaurant3.jpg",
+      "cusine": "North_Indian"
+    },
+    {
+      "id": 4,
+      "name": "Little Italy",
+      "rating": 3.8,
+      "image": "restaurant4.jpg",
+      "cusine": "Italian"
+    },
+    {
+      "id": 5,
+      "name": "Polar Bear",
+      "rating": 4.3,
+      "image": "restaurant5.jpg",
+      "cusine": "IceCream"
+    },
+    {
+      "id": 6,
+      "name": "Rajpurohit",
+      "rating": 4.5,
+      "image": "restaurant6.jpg",
+      "cusine": "Sweets"
+    }
+  ],
+  "menus": [
+    {
+      "restaurantId": 1,
+      "items": [
+        {
+          "Itemid": 1,
+          "name": "Idli",
+          "price": 30,
+          "image": "MenuItems/idli.jpg"
+        },
+        {
+          "Itemid": 2,
+          "name": "Dosa",
+          "price": 40,
+          "image": "MenuItems/Dosa.jpg"
+        },
+        {
+          "Itemid": 3,
+          "name": "Vada",
+          "price": 25,
+          "image": "MenuItems/sambar.jpg"
+        }
+      ]
+    },
+    {
+      "restaurantId": 2,
+      "items": [
+        {
+          "Itemid": 1,
+          "name": "Pav Bhaji",
+          "price": 80,
+          "image": "MenuItems/pav bhaji.jpg"
+        },
+        {
+          "Itemid": 2,
+          "name": "Misal Pav",
+          "price": 60,
+          "image": "MenuItems/misal-pav.jpg"
+        },
+        {
+          "Itemid": 3,
+          "name": "Tandoori Chicken",
+          "price": 120,
+          "image": "MenuItems/tandoori chicken.jpg"
+        }
+      ]
+    },
+    {
+      "restaurantId": 3,
+      "items": [
+        {
+          "Itemid": 1,
+          "name": "Shahi Paneer",
+          "price": 100,
+          "image": "MenuItems/shahi paneer.jpg"
+        },
+        {
+          "Itemid": 2,
+          "name": "Rogan Josh",
+          "price": 120,
+          "image": "MenuItems/Rogan Josh.jpg"
+        },
+        {
+          "Itemid": 3,
+          "name": "Butter Chicken",
+          "price": 150,
+          "image": "MenuItems/butter chicken.jpg"
+        }
+      ]
+    },
+    {
+      "restaurantId": 4,
+      "items": [
+        {
+          "Itemid": 1,
+          "name": "Pizza",
+          "price": 180,
+          "image": "MenuItems/pizza.jpg"
+        },
+        {
+          "Itemid": 2,
+          "name": "Pasta",
+          "price": 130,
+          "image": "MenuItems/pasta.jpg"
+        },
+        {
+          "Itemid": 3,
+          "name": "Minestrone",
+          "price": 150,
+          "image": "MenuItems/Minestrone.jpg"
+        }
+      ]
+    },
+    {
+      "restaurantId": 5,
+      "items": [
+        {
+          "Itemid": 1,
+          "name": "Chocolate Ice Cream",
+          "price": 60,
+          "image": "MenuItems/C_IceCream.jpg"
+        },
+        {
+          "Itemid": 2,
+          "name": "Strawberry Ice Cream",
+          "price": 50,
+          "image": "MenuItems/S_IceCream.jpg"
+        },
+        {
+          "Itemid": 3,
+          "name": "Sundae",
+          "price": 120,
+          "image": "MenuItems/IceCream-sundae.jpg"
+        },
+        {
+          "Itemid": 4,
+          "name": "Cherry Venila Ice Cream",
+          "price": 70,
+          "image": "MenuItems/CV_IceCream.jpg"
+        }
+      ]
+    },
+    {
+      "restaurantId": 6,
+      "items": [
+        {
+          "Itemid": 1,
+          "name": "Gulab Jamun",
+          "price": 80,
+          "image": "MenuItems/gulab-jamun.jpg"
+        },
+        {
+          "Itemid": 2,
+          "name": "Rasgulla",
+          "price": 80,
+          "image": "MenuItems/rasgulla.jpg"
+        },
+        {
+          "Itemid": 3,
+          "name": "Rice Kheer",
+          "price": 40,
+          "image": "MenuItems/rice-kheer.jpg"
+        }
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "orderID": 1,
+      "id": "37a1",
+      "restaurantID": 1,
+      "items": [
+        {
+          "menuItemID": 1,
+          "quantity": 2
+        },
+        {
+          "menuItemID": 3,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 927,
+      "status": "Pending"
+    },
+    {
+      "orderID": 2,
+      "id": "dc23",
+      "restaurantID": 2,
+      "items": [
+        {
+          "menuItemID": 4,
+          "quantity": 1
+        },
+        {
+          "menuItemID": 6,
+          "quantity": 2
+        }
+      ],
+      "totalAmount": 557,
+      "status": "Preparing"
+    }
+  ],
+  "deliveries": [
+    {
+      "deliveryID": 1,
+      "orderID": 1,
+      "agentName": "Ravi Kumar",
+      "agentPhone": "9876501234",
+      "status": "In Progress",
+      "estimatedTimeOfArrival": "2025-09-10T14:30:00"
+    },
+    {
+      "deliveryID": 2,
+      "orderID": 2,
+      "agentName": "Suresh Nair",
+      "agentPhone": "9123456789",
+      "status": "Pending Pickup",
+      "estimatedTimeOfArrival": null
+    }
+  ],
+  "payments": [
+    {
+      "paymentID": 1,
+      "orderID": 1,
+      "paymentMethod": "Card",
+      "amount": 927,
+      "status": "Successful",
+      "transactionDate": "2025-09-10T14:00:00"
+    },
+    {
+      "paymentID": 2,
+      "orderID": 2,
+      "paymentMethod": "UPI",
+      "amount": 557,
+      "status": "Pending",
+      "transactionDate": null
+    }
+  ],
+  "cart": [
+    {
+      "id": 1757859182934,
+      "item": {
+        "Itemid": 1,
+        "name": "Idli",
+        "price": 30,
+        "image": "MenuItems/idli.jpg",
+        "restaurant": "Restaurant #1",
+        "category": "Main Course",
+        "imageUrl": "MenuItems/idli.jpg"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 1757859184128,
+      "item": {
+        "Itemid": 2,
+        "name": "Dosa",
+        "price": 40,
+        "image": "MenuItems/Dosa.jpg",
+        "restaurant": "Restaurant #1",
+        "category": "Main Course",
+        "imageUrl": "MenuItems/Dosa.jpg"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 1757859186853,
+      "item": {
+        "Itemid": 3,
+        "name": "Vada",
+        "price": 25,
+        "image": "MenuItems/sambar.jpg",
+        "restaurant": "Restaurant #1",
+        "category": "Main Course",
+        "imageUrl": "MenuItems/sambar.jpg"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 1757860439554,
+      "item": {
+        "Itemid": 1,
+        "name": "Pav Bhaji",
+        "price": 80,
+        "image": "MenuItems/pav bhaji.jpg",
+        "restaurant": "Restaurant #2",
+        "category": "Main Course",
+        "imageUrl": "MenuItems/pav bhaji.jpg"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 1757865692530,
+      "item": {
+        "Itemid": 1,
+        "name": "Idli",
+        "price": 30,
+        "image": "MenuItems/idli.jpg",
+        "restaurant": "Restaurant #1",
+        "category": "Main Course",
+        "imageUrl": "MenuItems/idli.jpg"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 1757908428798,
+      "item": {
+        "Itemid": 2,
+        "name": "Rogan Josh",
+        "price": 120,
+        "image": "MenuItems/Rogan Josh.jpg",
+        "restaurant": "Restaurant #3",
+        "category": "Main Course",
+        "imageUrl": "MenuItems/Rogan Josh.jpg"
+      },
+      "quantity": 1
+    }
+  ]
+}

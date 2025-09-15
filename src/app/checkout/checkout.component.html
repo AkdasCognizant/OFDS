@@ -1,0 +1,316 @@
+
+<div class="min-h-screen gradient-subtle">
+    
+    <!-- container body  -->
+     <div class="container-fluid py-4 main-content-container">
+        <div class="row gx-4">
+            <div class="max-w-6xl mx-auto">
+
+            <!-- Header -->
+            <div class="checkout-header">
+                <a routerLink="/cart" class="back-link">
+                <i class="bi bi-arrow-left"></i> &nbsp;
+                    Back to Cart
+                </a>
+                <h1 class="checkout-title">Checkout</h1>
+            </div>
+            </div>
+
+            <!-- body  -->
+            <!-- DELIVERY ADDRESS  -->
+            <div class="col-lg-8 left-section mb-4">
+            <div class="card shadow-sm mb-2">
+                <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                    <h5 class="card-title mb-1 fs-4 fw-bold"><i class="bi bi-geo-alt" style="color: #f97316;"></i> Delivery Address</h5>
+                        
+                    <!-- address box  -->
+                        <div class="card-body">
+
+                            <!-- Address Selection -->
+                            <div class="address-container">
+                                <!-- build the login to fetch address from database here  -->
+                            <div
+                                *ngFor="let address of addresses"
+                                class="border rounded p-3 addressBox "
+                                [ngClass]="{
+                                'border-primary bg-light': selectedAddress === address.id.toString(),
+                                'border': selectedAddress !== address.id.toString()
+                                }"
+                                (click)="selectedAddress = address.id.toString()"
+                                >
+
+                                <div class="d-flex align-items-start gap-3">
+                                    <input
+                                        type="radio"
+                                        name="address"
+                                        [value]="address.id.toString()"
+                                        [(ngModel)]="selectedAddress"
+                                        class="mt-2"
+                                    />
+
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex align-items-center gap-2 mb-1">
+                                        <strong>{{ address.type }}</strong>
+                                        <span *ngIf="address.isDefault" class="badge bg-warning text-light text-xs">Default</span>
+                                        </div>
+                                        <p class="text-muted small">{{ address.address }}</p>
+                                    </div>
+
+                                    <button class="btn btn-outline outline btn-sm" (click)="editAddress(address)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                            </div>
+
+                            <!-- Add New Address Button -->
+                            <button class="btn btn-outline-primary w-100 mt-4 outline shadow-sm" (click)="showAddAddress = !showAddAddress">
+                            <i class="bi bi-plus me-2"></i>
+                            Add New Address
+                            </button>
+
+                            <!-- Add Address Form -->
+                            <div *ngIf="showAddAddress" class="card mt-4 border border-dashed">
+                            <div class="card-body p-3 shadow-sm">
+                                <div class="d-flex flex-column gap-3">
+                                <input type="text" class="form-control" placeholder="Address Type (Home, Office, etc.)" [(ngModel)]="newAddressType"/>
+                                <input type="text" class="form-control" placeholder="Complete Address" [(ngModel)]="newAddressText"/>
+
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-secondary btn-sm outline" (click)="cancelAddAddress()">Cancel</button>
+                                    <button class="btn btn-warning btn-sm " (click)="saveAddress()">Save Address</button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        
+                </div>        
+                </div>
+            </div>
+
+            <!-- PAYMENT METHOD  -->
+                <div class="col left-section mb-4">
+                    <div class="card shadow-sm mb-4 ">
+                    <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                    <h5 class="card-title mb-1 fs-4 fw-bold"><i class="bi bi-credit-card" style="color: #f97316;"></i> Payment Method</h5>
+
+                    <div class="d-flex align-items-start gap-3">
+                    <div class="card-body">
+
+                        <div class="payment-container">
+                        <!-- <div
+                            *ngFor="let option of paymentOptions"
+                            class="border rounded p-3 paymentBox "
+                            [ngClass]="{
+                            'border-primary bg-light': selectedPaymentMethod === option.id.toString(),
+                            'border': selectedPaymentMethod !== option.id.toString()
+                            }"
+                            (click)="selectedPaymentMethod = option.id.toString()"
+                            > -->
+
+                        <div
+                            *ngFor="let option of paymentOptions"
+                            class="border rounded-xl p-4 cursor-pointer transition-all duration-300 ease-in-out"
+                            [ngClass]="{
+                            'border-blue-500 bg-blue-50/50 shadow-md': selectedPaymentMethod === option.id.toString(),
+                            'border-gray-200': selectedPaymentMethod !== option.id.toString()
+                            }"
+                            (click)="selectedPaymentMethod = option.id.toString()"
+                        >
+
+                            <div class="d-flex align-items-start gap-3">
+                                <input
+                                    type="radio"
+                                    name="paymentOptions"
+                                    [value]="option.id.toString()"
+                                    [(ngModel)]="selectedPaymentMethod"
+                                    class="mt-2"
+                                />
+
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                    <i class="{{option.class}}"></i>
+                                    <strong>{{ option.type }}</strong>
+                                    </div>
+                                    <p class="text-muted small">{{ option.comment }}</p>
+                                </div>
+
+                            </div>
+
+
+                            <!-- Conditional content that appears directly below the selected radio button -->
+                            <div *ngIf="selectedPaymentMethod === option.id.toString()">
+                            <!-- Credit/Debit Card details -->
+                            <div *ngIf="option.id === 1" class="mt-4 p-4 card bg-gray-100/50 shadow-sm rounded-lg space-y-3">
+                                <h6 class="font-semibold text-gray-700">Enter your Card Details:</h6>
+                                <input type="text" placeholder="Card Number" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <div class="flex gap-3">
+                                <input type="text" placeholder="MM/YY" class="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <input type="text" placeholder="CVV" class="w-1/2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                </div>
+                                <input type="text" placeholder="Cardholder Name" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            <!-- UPI details -->
+                            <div *ngIf="option.id === 2" class="mt-4 p-4 card bg-gray-100/50 shadow-sm rounded-lg space-y-3">
+                                <h6 class="font-semibold text-gray-700">Enter your UPI ID:</h6>
+                                <input type="text" placeholder="upi-id@okaxis" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+                            </div>
+
+                            
+
+                        </div>
+                        </div>
+
+
+                        
+
+                        <div >
+                        <div >
+                           
+
+                        </div> 
+                        </div>
+
+                        </div>
+                        </div>
+
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div> 
+
+            </div>
+
+
+            
+            <!-- RIGHT SECTION  -->
+             <!-- ORDER SUMMARY  -->
+            <div class="order-summary-card shadow-sm border border-dashed">
+            <h5 class="card-title mb-1 fs-4 fw-bold"><i class="bi bi-receipt-cutoff" style="color: #f97316;"></i> Order Summary</h5><br />
+
+            <div class="card-body">
+                <div class="order-item">
+                <img src="biryani.jpg" alt="Chicken Biryani" class="item-image">
+                <div class="item-details">
+                    <span class="item-name">Chicken Biryani</span>
+                    <span class="item-restaurant">Spice Garden</span>
+                </div>
+                <div class="item-price">
+                    <span class="item-quantity">×2</span>
+                    <span class="item-total-price">₹598</span>
+                </div>
+                </div>
+
+                <div class="order-item">
+                <img src="dosa.jpg" alt="Masala Dosa" class="item-image">
+                <div class="item-details">
+                    <span class="item-name">Masala Dosa</span>
+                    <span class="item-restaurant">South Delights</span>
+                </div>
+                <div class="item-price">
+                    <span class="item-quantity">×1</span>
+                    <span class="item-total-price">₹149</span>
+                </div>
+                </div>
+
+                <!-- EXPRESS DELIVERY SECTION  -->
+                <div class="express-delivery-card">
+                <div class="header ">
+                    <div class="left-section">
+                    <i class="bi bi-lightning-charge icon"></i>
+                    <span class="express-text">Express Delivery</span>
+                    </div>
+                    <div class="right-section">
+                    <span class="old-price">₹60</span>
+                    <span class="new-price">FREE</span>
+                    </div>
+                </div>
+                <p class="description">
+                    Get your order in 15-20 minutes
+                </p>
+                </div>
+
+                <div class="charges-summary">
+
+                <!-- ORDER BILL  (FETCH DETAILS FROM db.json FOR ORDER FROM CART)-->
+                <div class="summary-line">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value">₹747</span>
+                </div>
+                <div class="summary-line">
+                    <span class="summary-label">Delivery Fee</span>
+                    <span class="summary-value text-success">FREE</span>
+                </div>
+                <div class="summary-line">
+                    <span class="summary-label">GST (18%)</span>
+                    <span class="summary-value">₹134</span>
+                </div>
+                </div>
+
+                <div class="total-amount">
+                <span class="total-label">Total</span>
+                <span class="total-value">₹881</span>
+                </div>
+
+                <div class="estimated-delivery">
+                <i class="bi bi-clock"></i>
+                <span>Estimated delivery: 25-30 minutes</span>
+                </div>
+
+                <button class="place-order-button" (click)="payNow()">
+                <i class="bi bi-check-circle"></i> Place Order ₹881
+                </button>
+
+                <div class="secure-payment-info">
+                <i class="bi bi-lock"></i>
+                <span>Your payment information is secure and encrypted</span>
+                </div>
+            </div>
+            </div>
+
+
+
+
+
+
+                
+
+            
+
+        </div>
+        </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

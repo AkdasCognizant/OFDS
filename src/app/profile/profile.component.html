@@ -1,0 +1,13 @@
+
+
+
+<div *ngIf="currentUser">
+  <h2>Welcome, {{ currentUser.name }}!</h2>
+  <p>Customer Id: {{ currentUser.id }}</p>
+  <p>Email: {{ currentUser.email }}</p>
+  <p>Phone: {{ currentUser.phone }}</p>
+</div>
+
+
+<button (click)="logout()">Logout</button>
+

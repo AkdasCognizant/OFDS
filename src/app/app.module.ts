@@ -16,6 +16,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { RestaurantDashboardComponent } from './restaurant-dashboard/restaurant-dashboard.component';
+import { RestaurantLoginComponent } from './restaurant-login/restaurant-login.component';
+import { RestaurantSignupComponent } from './restaurant-signup/restaurant-signup.component';
+import { RestaurantNavbarComponent } from './restaurant-navbar/restaurant-navbar.component';
 
 
 @NgModule({
@@ -29,6 +33,12 @@ import { SignupComponent } from './signup/signup.component';
     NavbarComponent,
     MenuComponent,
     FooterComponent,
+    RestaurantDashboardComponent,
+    RestaurantLoginComponent,
+    RestaurantSignupComponent,
+    LoginComponent,
+    SignupComponent,
+    RestaurantNavbarComponent
 
   ],
   imports: [
@@ -37,9 +47,7 @@ import { SignupComponent } from './signup/signup.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    LoginComponent,
-    SignupComponent
+    HttpClientModule
 
   ],
   providers: [],

@@ -1,8 +1,8 @@
-
+<app-navbar></app-navbar>
 
 <!-- <div class="container mt-2"> -->
-    <!-- <div class="carousel-size-box text-center"> -->
-        <!-- <h1 class="MainTitle">
+<!-- <div class="carousel-size-box text-center"> -->
+<!-- <h1 class="MainTitle">
             Hungry? We've got you covered!
         </h1>
         <div class="fs-1 mb-3">🍕 🍔 🥤</div>
@@ -13,25 +13,33 @@
         </button>
 
 
-        <!-- ANIMATION EFFECT  -->
-        <!-- Pizza Icon -->
-        <div class="floating-icon top-right lg-visible" style="animation-delay: 0s;">
-            <div class="icon-container large">
-                <!-- <span class="icon-text">🍕</span> -->
-            </div>
-        </div>
+    -->
+<!-- Pizza Icon -->
+<div class="floating-icon top-right lg-visible" style="animation-delay: 0s;">
+    <div class="icon-container large">
+        <!-- <span class="icon-text">🍕</span> -->
+    </div>
+</div>
 
-        <!-- Burger Icon -->
-        <div class="floating-icon bottom-left lg-visible" style="animation-delay: 1s;">
-            <div class="icon-container medium">
-                <!-- <span class="icon-text">🍔</span> -->
-            </div>
-        </div> -->
+<!-- Burger Icon -->
+<div class="floating-icon bottom-left lg-visible" style="animation-delay: 1s;">
+    <div class="icon-container medium">
+        <!-- <span class="icon-text">🍔</span> -->
+    </div>
+</div>
 
 
-    <!-- </div> -->
+<!-- </div> -->
 <!-- </div> -->
 
+<div class="swiggy-snackbar" *ngIf="showSnackbar">
+    <div class="snackbar-content">
+        <span class="snackbar-icon">🛵</span>
+        <span class="snackbar-text">
+            Order is <strong>{{ latestOrder?.status }}</strong>
+        </span>
+    </div>
+</div>
 
 
 <h3 class="mt-5 mb-3 text-center">Best Food Options</h3>
@@ -281,3 +289,6 @@
     </div>
 
 
+
+
+    <app-footer></app-footer>

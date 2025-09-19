@@ -9,12 +9,15 @@ import { ProfileComponent } from './profile/profile.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { SignupComponent } from './signup/signup.component';
 import { authGuard } from './auth.guard';
+import { RestaurantLoginComponent } from './restaurant-login/restaurant-login.component';
+import { RestaurantSignupComponent } from './restaurant-signup/restaurant-signup.component';
+import { RestaurantDashboardComponent } from './restaurant-dashboard/restaurant-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'restaurant', component: RestaurantComponent },
-  { path: 'restaurant/:id', component: MenuComponent},
+  { path: 'restaurant/:id', component: MenuComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'cart', component: CartComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
@@ -22,6 +25,10 @@ const routes: Routes = [
   { path: 'menu', component: MenuComponent },
   { path: 'checkout', component: CheckoutComponent },
 
+  //for restaurant
+  { path: 'restaurantLogin', component: RestaurantLoginComponent },
+  { path: 'restaurantSignup', component: RestaurantSignupComponent },
+  { path: 'restaurantDashboard', component: RestaurantDashboardComponent },
 ];
 
 @NgModule({

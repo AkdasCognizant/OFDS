@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../cart.service';
-import { CartLine } from '../models/cart.model';
+import { Cartitem } from '../models/cart.model';
 import { UserCart } from '../models/cart.model';
 
 interface Item {
@@ -31,6 +31,8 @@ export class MenuComponent implements OnInit {
   restaurantName!: string;
   menuItems: Item[] = [];
   cart: UserCart | null = null;
+  showSnackbar = false;
+  snackbarMessage = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -62,24 +64,39 @@ export class MenuComponent implements OnInit {
           });
     });
   }
-
   addToCart(item: Item): void {
-    const line: CartLine = {
+    const line: Cartitem = {
       itemID: item.Itemid,
       name: item.name,
       price: item.price,
       quantity: 1,
       originalPrice: item.originalPrice,
-      image: item.image,
-      imageUrl: item.imageUrl
+      image: item.image
     };
-    this.cartService.addItem(
-      line,
-      this.restaurantId,
-      this.restaurantName
-    );
-    alert(`${item.name} added to cart`);
+
+    if (this.cart && this.cart.restID !== this.restaurantId) {
+      alert(
+        `Your cart already contains items from "${this.cart.restaurantName}".\n` +
+        `Please checkout or clear your cart before adding items from "${this.restaurantName}".`
+      );
+      return;
+    }
+
+    this.cartService.addItem(line, this.restaurantId, this.restaurantName).subscribe({
+      next: () => {
+        this.snackbarMessage = `${item.name} added to cart`;
+        this.showSnackbar = true;
+        setTimeout(() => this.showSnackbar = false, 1200);
+      },
+      error: err => {
+        console.error('Failed to add item to cart', err);
+        this.snackbarMessage = `Failed to add ${item.name} to cart`;
+        this.showSnackbar = true;
+        setTimeout(() => this.showSnackbar = false, 1500);
+      }
+    });
   }
+
 
   proceedToCart(): void {
     this.router.navigate(['/cart']);

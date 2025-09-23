@@ -20,8 +20,6 @@
     <div *ngIf="!cart" class="text-center mt-5">
         <h4>Your cart is empty</h4>
         <p class="text-muted">Looks like you haven't added anything yet.</p>
-        <img src="assets/MenuItems/cart-148964_640.png" alt="Empty cart" class="img-fluid my-3"
-            style="max-width:200px;" />
         <a class="btn btn-primary" routerLink="/">Browse Menu</a>
     </div>
 
@@ -31,57 +29,59 @@
         <!-- Cart Items List -->
         <div class="col-lg-8 col-md-7">
             <div class="cart-items-scroll">
-                <div *ngFor="let line of cart.items; trackBy: trackByLine" class="card mb-3 shadow-sm">
+                <div *ngFor="let item of cart.items; trackBy: trackByLine" class="card mb-3 shadow-sm">
                     <div class="row g-0">
 
                         <!-- Image Column -->
                         <div class="col-md-4">
-                            <img [src]="line.imageUrl || line.image " class="img-fluid rounded-start"
-                                style="height:135px; object-fit:cover;" alt="{{ line.name }}" />
+                            <img [src]=" item.image " class="img-fluid rounded-start"
+                                style="height:135px; object-fit:cover;" alt="{{ item.name }}" />
                         </div>
 
                         <!-- Details & Controls -->
                         <div class="col-md-8">
                             <div class="card-body position-relative py-2 px-3">
                                 <div class="item-total-top-right fw-bold text-primary">
-                                    ₹{{ line.price * line.quantity }}
+                                    ₹{{ item.price * item.quantity }}
                                 </div>
 
-                                <h5 class="fw-bold fs-6">{{ line.name }}</h5>
+                                <h5 class="fw-bold fs-6">{{ item.name }}</h5>
+                                <p class="text-muted mt-1" *ngIf="cart?.restaurantName">
+                                    From: <strong>{{ cart.restaurantName }}</strong>
+                                </p>
 
                                 <p class="mb-1">
-                                    <span *ngIf="line.originalPrice && line.originalPrice > line.price"
+                                    <span *ngIf="item.originalPrice && item.originalPrice > item.price"
                                         class="text-muted text-decoration-line-through">
-                                        ₹{{ line.originalPrice }}
+                                        ₹{{ item.originalPrice }}
                                     </span>
                                     <span class="fw-bold text-success ms-2">
-                                        ₹{{ line.price }}
+                                        ₹{{ item.price }}
                                     </span>
                                 </p>
 
                                 <div class="d-flex align-items-center">
                                     <!-- Decrease -->
-                                    <button class="btn btn-outline-secondary btn-sm" (click)="decrease(line)"
-                                        [disabled]="line.quantity === 1">
+                                    <button class="btn btn-outline-secondary btn-sm" (click)="decrease(item.itemID)"
+                                        [disabled]="item.quantity === 1">
                                         −
                                     </button>
 
                                     <!-- Quantity Display -->
-                                    <span class="mx-2">{{ line.quantity }}</span>
+                                    <span class="mx-2">{{ item.quantity }}</span>
 
                                     <!-- Increase -->
-                                    <button class="btn btn-outline-secondary btn-sm" (click)="increase(line)">
+                                    <button class="btn btn-outline-secondary btn-sm" (click)="increase(item.itemID)">
                                         +
                                     </button>
 
                                     <!-- Remove -->
-                                    <button class="btn btn-outline-danger btn-sm ms-auto" (click)="remove(line)">
+                                    <button class="btn btn-outline-danger btn-sm ms-auto" (click)="remove(item)">
                                         🗑 Remove
                                     </button>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -114,19 +114,21 @@
                 <div class="d-flex justify-content-between fw-bold">
                     <span>Total:</span>
                     <span>
-                        ₹{{ getSubtotal()  + getGST() }}
+                        ₹{{ getSubtotal() + getGST() }}
                     </span>
                 </div>
 
                 <p class="mt-2 text-muted">Estimated delivery: 25–30 mins</p>
 
-                <a class="btn btn-primary w-100 mt-3" routerLink="/checkout">
-                    Proceed to Checkout
-                </a>
+                <button class="move-checkout" (click)="checkout()">
+                    <i class="bi bi-check-circle"></i> Checkout
+                </button>
 
-                <a class="btn btn-outline-primary w-100 mt-2" routerLink="/">
+                <a class="btn btn-outline-primary w-100 mt-2" routerLink="/restaurant">
                     Want to add more items?
                 </a>
+                <br>
+                <button class="btn btn-outline-danger btn-sm ms-auto" (click)="clear()">Clear Cart</button>
             </div>
         </div>
     </div>

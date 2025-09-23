@@ -20,6 +20,8 @@ import { RestaurantDashboardComponent } from './restaurant-dashboard/restaurant-
 import { RestaurantLoginComponent } from './restaurant-login/restaurant-login.component';
 import { RestaurantSignupComponent } from './restaurant-signup/restaurant-signup.component';
 import { RestaurantNavbarComponent } from './restaurant-navbar/restaurant-navbar.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { RestaurantNavbarComponent } from './restaurant-navbar/restaurant-navbar
     RestaurantSignupComponent,
     LoginComponent,
     SignupComponent,
-    RestaurantNavbarComponent
+    RestaurantNavbarComponent,
+    AdminComponent,
+    AdminLoginComponent
 
   ],
   imports: [

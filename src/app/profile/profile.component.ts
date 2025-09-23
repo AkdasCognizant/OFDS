@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Order } from '../models/order.model';
 import { User } from '../user';
+import { OrderService } from '../orders.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,17 +15,14 @@ export class ProfileComponent implements OnInit {
 
   currentUser: any;
   activeTab: string = '';
+  orders: Order[] = [];
+
 
   faqs = [
     {
       question: 'How do I track my order?',
       answer: 'Go to the "Orders" tab to see real-time updates on your order status.',
       icon: 'bi bi-truck'
-    },
-    {
-      question: 'Can I cancel an order after placing it?',
-      answer: 'Yes, within 2 minutes. After that, it depends on restaurant acceptance.',
-      icon: 'bi bi-x-circle'
     },
     {
       question: 'What payment methods are accepted?',
@@ -42,10 +41,14 @@ export class ProfileComponent implements OnInit {
     }
   ];
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private OrderService: OrderService) { }
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
+    const userID = this.authService.getUserId();
+    this.OrderService.getOrdersByUser(userID).subscribe(data => {
+      this.orders = data;
+    })
   }
 
   //User will be logged out on clicking logout button
@@ -57,4 +60,5 @@ export class ProfileComponent implements OnInit {
     // Call update service here
     alert('Profile updated successfully!');
   }
+
 }

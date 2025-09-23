@@ -1,19 +1,18 @@
-export interface CartLine {
+export interface Cartitem {
   itemID: number;
   name: string;
   price: number;
   quantity: number;
   image?: string;
-  imageUrl?: string;
   originalPrice?: number;
 }
 
 export interface UserCart {
-  id?: number;               // json-server‐assigned
-  userID: number;            // now a number
-  restID: number;            // restaurant context
-  restaurantName: string;    // restaurant display name
-  items: CartLine[];
+  id?: number;               
+  userID: number;            
+  restID: number;            
+  restaurantName: string;    
+  items: Cartitem[];
   itemCount: number;
   totalAmount: number;
 }

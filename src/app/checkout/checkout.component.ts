@@ -118,9 +118,9 @@ export class CheckoutComponent implements OnInit {
     this.orderService.placeOrder(newOrder).subscribe(
       response => {
         console.log('Order placed successfully:', response);
-         localStorage.setItem('newOrderPlaced', 'true');
-        this.cartService.clearCart();
-        alert('Order placed successfully! Redirecting to home page');
+        localStorage.setItem('newOrderPlaced', 'true');
+        this.cartService.clearCart().subscribe();
+        alert('Order placed successfully!');
         this.router.navigate(['/home']);
       },
       error => {

@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     const userID = this.auth.getUserId();
     const orderPlacedFlag = localStorage.getItem('newOrderPlaced');
     if (orderPlacedFlag === 'true') {
-      localStorage.removeItem('newOrderPlaced');
+
       this.orderService.getOrdersByUser(userID).subscribe(orders => {
         if (orders.length > 0) {
           this.latestOrder = orders.sort((a, b) =>
@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
           if (this.latestOrder.status == 'placed') {
             this.showSnackbar = true;
             setTimeout(() => this.showSnackbar = false, 6000);
+            localStorage.removeItem('newOrderPlaced');
             // auto-hide
           }
 

@@ -1,19 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartService } from '../cart.service';
-import { UserCart, CartLine } from '../models/cart.model';
+import { UserCart, Cartitem } from '../models/cart.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
+  standalone:false,
   templateUrl: './cart.component.html',
-  standalone: false,
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit, OnDestroy {
   cart: UserCart | null = null;
   private sub = new Subscription();
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.sub = this.cartService.cart$.subscribe(c => this.cart = c);
@@ -23,22 +24,32 @@ export class CartComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  increase(line: CartLine): void {
-    this.cartService.updateItem({ ...line, quantity: line.quantity + 1 });
+  increase(itemID: number): void {
+    this.cartService.increaseQuantity(itemID).subscribe({
+      next: () => {},
+      error: err => console.error('Increase failed', err)
+    });
   }
 
-  decrease(line: CartLine): void {
-    if (line.quantity > 1) {
-      this.cartService.updateItem({ ...line, quantity: line.quantity - 1 });
-    }
+  decrease(itemID: number): void {
+    this.cartService.decreaseQuantity(itemID).subscribe({
+      next: () => {},
+      error: err => console.error('Decrease failed', err)
+    });
   }
 
-  remove(line: CartLine): void {
-    this.cartService.removeItem(line);
+  remove(item: Cartitem): void {
+    this.cartService.removeItem(item).subscribe({
+      next: () => {},
+      error: err => console.error('Remove failed', err)
+    });
   }
 
   clear(): void {
-    this.cartService.clearCart();
+    this.cartService.clearCart().subscribe({
+      next: () => {},
+      error: err => console.error('Clear cart failed', err)
+    });
   }
 
   getSubtotal(): number {
@@ -53,11 +64,11 @@ export class CartComponent implements OnInit, OnDestroy {
     return Math.round(this.getSubtotal() * 0.18);
   }
 
-  trackByLine(_: number, line: CartLine): number {
-    return line.itemID;
+  trackByLine(_: number, item: Cartitem): number {
+    return item.itemID;
   }
 
   checkout(): void {
-    // navigate to /checkout
+    this.router.navigate(['/checkout']);
   }
 }

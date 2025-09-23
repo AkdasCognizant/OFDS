@@ -1,28 +1,72 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
+import { restaurantUsers } from './restaurantUsers';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private isLoggedIn = false;
-  private currentUser: User | null = null;
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  public currentUser$ = this.currentUserSubject.asObservable();
 
-  login(user: User) {
-    this.isLoggedIn = true;
-    this.currentUser = user;
+  constructor() {
+    const saved = localStorage.getItem('currentUser');
+    if (saved) {
+      try {
+        this.currentUserSubject.next(JSON.parse(saved));
+      } catch {}
+    }
   }
 
-  logout() {
-    this.isLoggedIn = false;
-    this.currentUser = null;
+  login(user: User): void {
+    this.currentUserSubject.next(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  logout(): void {
+    this.currentUserSubject.next(null);
+    localStorage.removeItem('currentUser');
   }
 
   getCurrentUser(): User | null {
-    return this.currentUser;
+    return this.currentUserSubject.value;
+  }
+
+  /** Returns numeric userID, or throws if not logged in */
+  getUserId(): number {
+    const u = this.currentUserSubject.value;
+    if (!u) {
+      throw new Error('User not authenticated');
+    }
+    return u.userID;
   }
 
   isAuthenticated(): boolean {
-    return this.isLoggedIn;
+    return this.currentUserSubject.value !== null;
+  }
+
+
+
+
+
+  // for restaurant login 
+  private restisLoggedIn = false;
+  private currentRestUser: restaurantUsers | null = null;
+ 
+  restLogin(restaurant: restaurantUsers) {
+    this.restisLoggedIn = true;
+    this.currentRestUser = restaurant;
+  }
+ 
+  restLogout() {
+    this.restisLoggedIn = false;
+    this.currentRestUser = null;
+  }
+ 
+  getCurrentRestUser(): restaurantUsers | null {
+    return this.currentRestUser;
+  }
+ 
+  restisAuthenticated(): boolean {
+    return this.restisLoggedIn;
   }
 }

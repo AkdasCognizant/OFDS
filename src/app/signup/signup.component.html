@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 
 <body>
   <div class="login-wrapper">
@@ -14,45 +16,33 @@
           <!-- Name -->
           <div class="input-group">
             <i class="bi bi-person"></i>
-            <input
-              type="text"
-              formControlName="name"
+            <input type="text" formControlName="name"
               [placeholder]="submitted && f['name'].errors ? 'Name is required' : 'Full Name'"
-              [class.error]="submitted && f['name'].errors"
-            />
+              [class.error]="submitted && f['name'].errors" />
           </div>
 
           <!-- Email -->
           <div class="input-group">
             <i class="bi bi-envelope"></i>
-            <input
-              type="email"
-              formControlName="email"
+            <input type="email" formControlName="email"
               [placeholder]="submitted && f['email'].errors ? 'Enter a valid email address' : 'Email address'"
-              [class.error]="submitted && f['email'].errors"
-            />
+              [class.error]="submitted && f['email'].errors" />
           </div>
 
           <!-- Phone -->
           <div class="input-group">
             <i class="bi bi-telephone"></i>
-            <input
-              type="number"
-              formControlName="phone"
+            <input type="number" formControlName="phone"
               [placeholder]="submitted && f['phone'].errors ? 'Enter a valid 10-digit phone number' : 'Phone number'"
-              [class.error]="submitted && f['phone'].errors"
-            />
+              [class.error]="submitted && f['phone'].errors" />
           </div>
 
           <!-- Password -->
           <div class="input-group">
             <i class="bi bi-key"></i>
-            <input
-              type="password"
-              formControlName="password"
+            <input type="password" formControlName="password"
               [placeholder]="submitted && f['password'].errors ? 'Password must be at least 6 characters' : 'Create password'"
-              [class.error]="submitted && f['password'].errors"
-            />
+              [class.error]="submitted && f['password'].errors" />
           </div>
 
           <!-- Terms & Conditions Checkbox -->
@@ -79,3 +69,6 @@
     </div>
   </div>
 </body>
+
+
+<app-footer></app-footer>

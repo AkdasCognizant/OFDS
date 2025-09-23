@@ -1,24 +1,24 @@
-
-  <nav class="navbar">
-  <div class="navbar-box">      
-      <!-- Logo -->
-      <div class="logo-container">
-        <div class="logo-icon">
-            <a class="icon-placeholder" [routerLink]="['/home']">
-              <img src="logo.jpg" alt="FoodExpress Logo" class="logo-image" style="height: 60px; width: 60px; border-radius: 40px;" />
-            </a> 
-        </div>
-        <div class="logo-text">
-            <h1>FoodExpress</h1>
-            <p>Delivering Happiness</p>
-        </div>
+<nav class="navbar">
+  <div class="navbar-box">
+    <!-- Logo -->
+    <div class="logo-container">
+      <div class="logo-icon">
+        <a class="icon-placeholder" [routerLink]="['/home']">
+          <img src="logo.jpg" alt="FoodExpress Logo" class="logo-image"
+            style="height: 60px; width: 60px; border-radius: 40px;" />
+        </a>
+      </div>
+      <div class="logo-text">
+        <h1>FoodExpress</h1>
+        <p>Delivering Happiness</p>
+      </div>
 
       <!-- Deliver Location -->
       <div class="location-container">
         <i class="bi bi-geo-alt"></i>
         <div class="location-text">
           <p class="deliver-to">Deliver to</p>
-          <p class="current-location">Current Location</p>
+          <p class="current-location">Coimbatore</p>
         </div>
       </div>
 
@@ -26,18 +26,14 @@
       <div class="search-bar-container desktop-only">
         <div class="search-wrapper">
           <i class="bi bi-search search-icon"></i>
-          <input type="text" placeholder="Search for dishes, restaurants..." [(ngModel)]="searchQuery"/>
+          <input type="text" placeholder="Search for dishes, restaurants..." [(ngModel)]="searchQuery" />
         </div>
       </div>
 
       <!-- nav bar  -->
-       <div class="nav-links desktop-only">
-        <a
-          *ngFor="let link of navLinks"
-          [routerLink]="link.href"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
+      <div class="nav-links desktop-only">
+        <a *ngFor="let link of navLinks" [routerLink]="link.href" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
           {{ link.label }}
         </a>
       </div>
@@ -45,16 +41,21 @@
       <!-- action buttons  -->
       <div class="action-buttons">
         <!-- Cart -->
-        <a (click)="onCartClick()" class="btn-ghost-icon relative">
-          <i class="bi bi-cart"></i>
-        </a>
+        <a (click)="onCartClick()" class="btn-ghost-icon position-relative">
+          <i class="bi bi-cart fs-5"></i>
+          <span *ngIf="cartItemCount > 0" class="cart-badge">
+            {{ cartItemCount }}
+          </span>
 
-        <!-- User Profile -->
-        <a (click)="onProfileClick()" class="btn-ghost-icon">
-          <i class="bi bi-person"></i>
         </a>
       </div>
 
-      </div>
+      <!-- User Profile -->
+      <a (click)="onProfileClick()" class="btn-ghost-icon">
+        <i class="bi bi-person"></i>
+      </a>
     </div>
+
+  </div>
+
 </nav>

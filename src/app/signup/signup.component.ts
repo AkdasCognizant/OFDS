@@ -9,7 +9,8 @@ import { User } from '../user';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  imports: [ReactiveFormsModule, CommonModule, NgIf, RouterModule],
+  standalone: false
+  // imports: [ReactiveFormsModule, CommonModule, NgIf, RouterModule],
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
@@ -25,7 +26,7 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      // termsAccepted: [false, [Validators.requiredTrue]]
+      termsAccepted: [false, [Validators.requiredTrue]]
     });
 
   }

@@ -1,3 +1,6 @@
+<app-navbar></app-navbar>
+
+
 
 <body>
   <div class="login-wrapper">
@@ -14,23 +17,17 @@
           <!-- Email -->
           <div class="input-group">
             <i class="bi bi-envelope"></i>
-            <input
-              type="email"
-              formControlName="email"
+            <input type="email" formControlName="email"
               [placeholder]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched ? 'Email Required' : 'Email address'"
-              [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
-            />
+              [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" />
           </div>
 
           <!-- Password -->
           <div class="input-group">
             <i class="bi bi-key"></i>
-            <input
-              type="password"
-              formControlName="password"
+            <input type="password" formControlName="password"
               [placeholder]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched ? 'Password Required' : 'Password'"
-              [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-            />
+              [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" />
           </div>
 
           <!-- Login Button -->
@@ -49,7 +46,7 @@
           <!-- Links -->
           <div class="form-links">
             <!-- ADD FORGOT PASSWORD FUNCTIONALITY -->
-            <a >Forgot Password?</a>
+            <a>Forgot Password?</a>
             <span> | </span>
             <a routerLink="/signup" id="register">Sign Up</a>
           </div>
@@ -63,3 +60,6 @@
     </div>
   </div>
 </body>
+
+
+<app-footer></app-footer>

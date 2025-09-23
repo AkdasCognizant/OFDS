@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../cart.service';
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 import { User } from '../user';
@@ -11,8 +12,8 @@ import { User } from '../user';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  // standalone: false,
-  imports: [RouterModule, CommonModule, ReactiveFormsModule]
+  standalone: false,
+  // imports: [RouterModule, CommonModule, ReactiveFormsModule]
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -25,8 +26,9 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private cartService:CartService
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -68,7 +70,7 @@ export class LoginComponent implements OnInit {
       if (matchedUser) {
         this.message = 'Login successful!';
         this.authService.login(matchedUser);
-        this.router.navigate([this.redirectUrl]);
+        this.router.navigate([this.redirectUrl]);this.cartService.loadCart();
       } else {
         this.message = 'Invalid email or password.';
         this.loginForm.get('email')?.setErrors({ invalid: true });

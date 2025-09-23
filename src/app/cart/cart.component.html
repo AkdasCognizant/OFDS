@@ -1,90 +1,106 @@
+<app-navbar></app-navbar>
+
 <div class="container-fluid py-4 main-content-container">
 
     <!-- Header -->
-    <div class="cart-header">
+    <div class="cart-header mb-4">
         <a routerLink="/home" class="back-link">
-            <i class="bi bi-arrow-left"></i> &nbsp;
-            Back to Home
+            <i class="bi bi-arrow-left"></i>&nbsp;Back to Home
         </a>
         <h1 class="checkout-title">Cart</h1>
     </div>
 
-<div *ngIf="cartItems.length === 0" class="text-center mt-5">
-    <h4>Your cart is empty</h4>
-    <p class="text-muted">Looks like you haven't added anything yet.</p>
-    <img src="MenuItems/cart-148964_640.png" alt="Empty cart">
-    <a class="btn btn-primary" [routerLink]="'/'">Browse Menu</a>
+    <!-- Loading State -->
+    <!-- <div *ngIf="!cart" class="text-center mt-5">
+        <div class="spinner-border" role="status"></div>
+        <p class="mt-2">Loading your cart...</p>
+    </div> -->
 
-</div>
+    <!-- Empty Cart -->
+    <div *ngIf="!cart" class="text-center mt-5">
+        <h4>Your cart is empty</h4>
+        <p class="text-muted">Looks like you haven't added anything yet.</p>
+        <a class="btn btn-primary" routerLink="/">Browse Menu</a>
+    </div>
 
-<div *ngIf="cartItems.length > 0">
-    <div class="row">
-        <!-- Cart Items -->
+    <!-- Cart Items + Summary -->
+    <div *ngIf="cart && cart.items.length > 0" class="row">
+
+        <!-- Cart Items List -->
         <div class="col-lg-8 col-md-7">
-            <!-- <h3 class="cart-heading">Your Cart</h3> -->
-            <div class="cart-items-scroll" *ngIf="cartItems.length > 0">
-                <div *ngFor="let cartItem of cartItems" class="card mb-3 shadow-sm">
-
+            <div class="cart-items-scroll">
+                <div *ngFor="let item of cart.items; trackBy: trackByLine" class="card mb-3 shadow-sm">
                     <div class="row g-0">
-                        <!-- Image -->
+
+                        <!-- Image Column -->
                         <div class="col-md-4">
-                            <img [src]="cartItem.item.imageUrl" class="img-fluid rounded-start "
-                                style="height: 135px; object-fit:cover;" alt="{{ cartItem.item.name }}">
+                            <img [src]=" item.image " class="img-fluid rounded-start"
+                                style="height:135px; object-fit:cover;" alt="{{ item.name }}" />
                         </div>
 
-                        <!-- Details -->
+                        <!-- Details & Controls -->
                         <div class="col-md-8">
                             <div class="card-body position-relative py-2 px-3">
                                 <div class="item-total-top-right fw-bold text-primary">
-                                    ₹{{ getItemTotal(cartItem) }}
+                                    ₹{{ item.price * item.quantity }}
                                 </div>
 
-                                <h5 class="fw-bold fs-6">{{ cartItem.item.name }}</h5>
-                                <p class="mb-1 text-muted small">{{ cartItem.item.restaurant }} • {{
-                                    cartItem.item.category }}</p>
-                                <p>
-                                    <span *ngIf="cartItem.item.originalPrice"
-                                        class="text-decoration-line-through text-muted">
-                                        ₹{{ cartItem.item.originalPrice }}
+                                <h5 class="fw-bold fs-6">{{ item.name }}</h5>
+                                <p class="text-muted mt-1" *ngIf="cart?.restaurantName">
+                                    From: <strong>{{ cart.restaurantName }}</strong>
+                                </p>
+
+                                <p class="mb-1">
+                                    <span *ngIf="item.originalPrice && item.originalPrice > item.price"
+                                        class="text-muted text-decoration-line-through">
+                                        ₹{{ item.originalPrice }}
                                     </span>
-                                    <span class="fw-bold text-success ms-2">₹{{ cartItem.item.price }}</span>
+                                    <span class="fw-bold text-success ms-2">
+                                        ₹{{ item.price }}
+                                    </span>
+                                </p>
 
                                 <div class="d-flex align-items-center">
-                                    <button class="btn btn-outline-secondary btn-sm"
-                                        (click)="decreaseQuantity(cartItem.id)"
-                                        [disabled]="cartItem.quantity === 1">−</button>
-                                    <span class="mx-2">{{ cartItem.quantity }}</span>
-                                    <button class="btn btn-outline-secondary btn-sm"
-                                        (click)="increaseQuantity(cartItem.id)">+</button>
-                                    <button class="btn btn-outline-danger btn-sm ms-auto"
-                                        (click)="confirmRemove(cartItem.id)"> 🗑 Remove</button>
+                                    <!-- Decrease -->
+                                    <button class="btn btn-outline-secondary btn-sm" (click)="decrease(item.itemID)"
+                                        [disabled]="item.quantity === 1">
+                                        −
+                                    </button>
 
+                                    <!-- Quantity Display -->
+                                    <span class="mx-2">{{ item.quantity }}</span>
+
+                                    <!-- Increase -->
+                                    <button class="btn btn-outline-secondary btn-sm" (click)="increase(item.itemID)">
+                                        +
+                                    </button>
+
+                                    <!-- Remove -->
+                                    <button class="btn btn-outline-danger btn-sm ms-auto" (click)="remove(item)">
+                                        🗑 Remove
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <!-- Order Summary -->
         <div class="col-lg-4 col-md-5">
             <div class="card p-4 shadow-sm">
+                <h4>Order Summary</h4>
 
-                <h4>
-                    Order Summary</h4>
-                <div *ngIf="getDiscount()>0" class="alert alert-success mt-3">
-                    You're saving ₹{{getDiscount()}} on this order!
-                </div>
                 <div class="d-flex justify-content-between">
                     <span>Subtotal:</span>
                     <span>₹{{ getSubtotal() }}</span>
                 </div>
+
                 <div class="d-flex justify-content-between">
                     <span>Delivery Fee:</span>
-                    <span [ngClass]="{ 'text-success': getdeliveryFee() === 0 }">
-                        {{ getdeliveryFee() === 0 ? 'FREE' : '₹' + getdeliveryFee() }}
+                    <span [ngClass]="{ 'text-success': getDeliveryFee() === 0 }">
+                        {{ getDeliveryFee() === 0 ? 'FREE' : 'FREE' }}
                     </span>
                 </div>
 
@@ -92,17 +108,32 @@
                     <span>GST (18%):</span>
                     <span>₹{{ getGST() }}</span>
                 </div>
-                <hr>
+
+                <hr />
+
                 <div class="d-flex justify-content-between fw-bold">
                     <span>Total:</span>
-                    <span>₹{{ getTotal() }}</span>
+                    <span>
+                        ₹{{ getSubtotal() + getGST() }}
+                    </span>
                 </div>
+
                 <p class="mt-2 text-muted">Estimated delivery: 25–30 mins</p>
-                <button class="place-order-button" (click)="checkout()">Proceed to Checkout</button>
-                <a class="btn btn-outline-primary w-100 outline shadow-sm" [routerLink]="'/'">Want to add more items?</a>
+
+                <button class="move-checkout" (click)="checkout()">
+                    <i class="bi bi-check-circle"></i> Checkout
+                </button>
+
+                <a class="btn btn-outline-primary w-100 mt-2" routerLink="/restaurant">
+                    Want to add more items?
+                </a>
+                <br>
+                <button class="btn btn-outline-danger btn-sm ms-auto" (click)="clear()">Clear Cart</button>
             </div>
         </div>
     </div>
 </div>
-</div>
 
+
+
+<app-footer>

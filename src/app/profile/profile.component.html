@@ -154,13 +154,14 @@
             </div>
 
             <!-- Default Fallback -->
-            <div *ngSwitchDefault>
-              <h4>Welcome, {{ currentUser.name }}!</h4>
-              <p>Customer Id: {{ currentUser.userID }}</p>
-              <p>Email: {{ currentUser.email }}</p>
-              <p>Phone: {{ currentUser.phone }}</p>
-              <p>Select a tab to view more details.</p>
-            </div>
+            <div *ngSwitchDefault class="card shadow-sm p-4 mb-4 bg-light rounded welcome-card">
+            <h4 class="text-primary mb-3">Welcome, {{ currentUser.name }}!</h4>
+            <!-- <p class="text-muted">Customer Id: {{ currentUser.userID }}</p> -->
+            <p><strong>Email:</strong> {{ currentUser.email }}</p>
+            <p><strong>Phone:</strong> {{ currentUser.phone }}</p>
+            <p class="text-secondary mt-3">Select a tab to view more details.</p>
+          </div>
+
           </ng-container>
         </div>
       </div>

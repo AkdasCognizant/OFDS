@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { Order } from '../models/order.model';
 import { User } from '../user';
 import { OrderService } from '../orders.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-profile',
@@ -41,7 +42,7 @@ export class ProfileComponent implements OnInit {
     }
   ];
 
-  constructor(private authService: AuthService, private router: Router, private OrderService: OrderService) { }
+  constructor(private authService: AuthService, private router: Router, private OrderService: OrderService, private UserService : UserService) { }
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
@@ -51,14 +52,23 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  //User will be logged out on clicking logout button
   logout() {
     this.authService.logout();
     this.router.navigate(['/login'], { queryParams: { redirectTo: '/' } });
   }
+  
+ 
+
   onUpdateCustomer(): void {
-    // Call update service here
-    alert('Profile updated successfully!');
-  }
+  this.UserService.updateCustomer(this.currentUser).subscribe({
+    next: (response) => {
+      alert(response); // "User updated successfully"
+    },
+    error: (err) => {
+      console.error('Update failed:', err);
+      alert('Update failed. Please try again.');
+    }
+  });
+}
 
 }

@@ -11,24 +11,34 @@
 
       <!-- Right: Login Form -->
       <div class="form-container">
-        <form [formGroup]="loginForm" (ngSubmit)="onLoginSuccess()">
+        <form [formGroup]="loginForm" (submit)="loginFormValidation()">
           <h4>Welcome Back</h4>
 
           <!-- Email -->
-          <div class="input-group">
-            <i class="bi bi-envelope"></i>
-            <input type="email" formControlName="email"
-              [placeholder]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched ? 'Email Required' : 'Email address'"
-              [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" />
-          </div>
+         <!-- Email -->
+        <div class="input-group"> 
+          <i class="bi bi-envelope"></i>
+          <input type="email" formControlName="email"
+            [placeholder]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched ? 'Email Required' : 'Email address'"
+            [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" />
+        </div>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="validation-message">
+          <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['email']">Enter a valid email address.</small>
+        </div>
 
-          <!-- Password -->
-          <div class="input-group">
-            <i class="bi bi-key"></i>
-            <input type="password" formControlName="password"
-              [placeholder]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched ? 'Password Required' : 'Password'"
-              [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" />
-          </div>
+        <!-- Password -->
+        <div class="input-group">
+          <i class="bi bi-key"></i>
+          <input type="password" formControlName="password"
+            [placeholder]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched ? 'Password Required' : 'Password'"
+            [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" />
+        </div>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="validation-message">
+          <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</small>
+        </div>
+
 
           <!-- Login Button -->
           <button type="submit" [disabled]="loginForm.invalid">Log In</button>

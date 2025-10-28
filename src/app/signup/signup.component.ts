@@ -35,27 +35,57 @@ export class SignupComponent implements OnInit {
     return this.signupForm.controls;
   }
 
+  // onSubmit(): void {
+  //   this.submitted = true;
+
+  //   if (this.signupForm.invalid) return;
+
+  //   const newUser: User = this.signupForm.value;
+
+  //   this.userService.signUp(newUser).subscribe({
+  //     next: () => {
+  //       alert('Customer signed up successfully!');
+  //       this.message = 'Customer signed up successfully!';
+  //       this.signupForm.reset();
+  //       this.termsAccepted = false;
+  //       this.submitted = false;
+        
+  //     },
+  //     error: () => {
+  //       alert('Signup failed. Please try again!');
+  //       this.message = 'Signup failed. Please try again!';
+  //     }
+  //   });
+
+  //   this.route.navigate(['/login']);
+  // }
+
   onSubmit(): void {
-    this.submitted = true;
+  this.submitted = true;
 
-    if (this.signupForm.invalid) return;
+  if (this.signupForm.invalid) return;
 
-    const newUser: User = this.signupForm.value;
+  // Convert phone to string to match backend expectations
+  const newUser: User = {
+    ...this.signupForm.value,
+    phone: this.signupForm.value.phone.toString()
+  };
 
-    this.userService.signUp(newUser).subscribe({
-      next: () => {
-        alert('Customer signed up successfully!');
-        this.message = 'Customer signed up successfully!';
-        this.signupForm.reset();
-        this.termsAccepted = false;
-        this.submitted = false;
-      },
-      error: () => {
-        alert('Signup failed. Please try again!');
-        this.message = 'Signup failed. Please try again!';
-      }
-    });
+  this.userService.signUp(newUser).subscribe({
+    next: () => {
+      alert('Customer signed up successfully!');
+      this.message = 'Customer signed up successfully!';
+      this.signupForm.reset();
+      this.termsAccepted = false;
+      this.submitted = false;
+    },
+    error: () => {
+      alert('Signup failed. Please try again!');
+      this.message = 'Signup failed. Please try again!';
+    }
+  });
 
-    this.route.navigate(['/login']);
-  }
+  this.route.navigate(['/login']);
+}
+
 }

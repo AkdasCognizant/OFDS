@@ -5,6 +5,15 @@ import { restaurantUsers } from './restaurantUsers';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  // setCurrentUser(arg0: { email: any; }) {
+  //   throw new Error('Method not implemented.');
+  // }
+
+  setCurrentUser(user: User): void {
+    this.currentUserSubject.next(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -24,8 +33,10 @@ export class AuthService {
 
   logout(): void {
     this.currentUserSubject.next(null);
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('jwtToken');       // Remove token
+    localStorage.removeItem('currentUser');    // Remove user info
   }
+
 
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
@@ -34,10 +45,12 @@ export class AuthService {
   /** Returns numeric userID, or throws if not logged in */
   getUserId(): number {
     const u = this.currentUserSubject.value;
-    if (!u) {
-      throw new Error('User not authenticated');
+
+    if (!u || u.id === undefined) {
+      throw new Error('User not authenticated or ID missing');
     }
-    return u.userID;
+
+    return u.id;
   }
 
   isAuthenticated(): boolean {
@@ -69,4 +82,13 @@ export class AuthService {
   restisAuthenticated(): boolean {
     return this.restisLoggedIn;
   }
+
+  setToken(token: string): void {
+    localStorage.setItem('jwtToken', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('jwtToken');
+  }
+
 }

@@ -5,7 +5,7 @@
       "name": "Akdas Sayyad",
       "email": "akdas@gmail.com",
       "password": "akdas123",
-      "phone": "9876543210",
+      "phone": "9527875657",
       "address": [
         {
           "type": "Home",
@@ -54,9 +54,9 @@
     {
       "userID": 4,
       "name": "Parag Koli",
-      "email": "parag@gmail.com",
+      "email": "parag123@gmail.com",
       "password": "parag123",
-      "phone": "6543210987",
+      "phone": "6543210979",
       "address": [
         {
           "type": "Work",
@@ -102,6 +102,22 @@
       "password": "2345678",
       "termsAccepted": true,
       "address": []
+    },
+    {
+      "id": "c4ae",
+      "name": "xyz",
+      "password": "123456",
+      "email": "pqr@gmail.com",
+      "phone": 1234567891,
+      "termsAccepted": true
+    },
+    {
+      "id": "98e0",
+      "name": "test ",
+      "password": "akdas123",
+      "email": "test@gmail.com",
+      "phone": 8766879890,
+      "termsAccepted": true
     }
   ],
   "restaurantUsers": [
@@ -1201,6 +1217,76 @@
       },
       "paymentMethod": 1,
       "orderDate": "2025-09-23T03:22:17.932Z"
+    },
+    {
+      "id": "00fa",
+      "orderID": 1758607802625,
+      "userID": 4,
+      "restID": 2,
+      "items": [
+        {
+          "itemID": 1,
+          "name": "Pav Bhaji",
+          "price": 80,
+          "quantity": 1,
+          "image": "MenuItems/pav bhaji.jpg"
+        },
+        {
+          "itemID": 2,
+          "name": "Misal Pav",
+          "price": 60,
+          "quantity": 1,
+          "image": "MenuItems/misal-pav.jpg"
+        },
+        {
+          "itemID": 3,
+          "name": "Tandoori Chicken",
+          "price": 120,
+          "quantity": 1,
+          "image": "MenuItems/tandoori chicken.jpg"
+        }
+      ],
+      "totalAmount": 306.8,
+      "totalItems": 3,
+      "status": "placed",
+      "deliveryAddress": {
+        "type": "Home",
+        "fullAddress": "321 Riverwalk, Old Town"
+      },
+      "paymentMethod": 3,
+      "orderDate": "2025-09-23T06:10:02.625Z"
+    },
+    {
+      "id": "ac0f",
+      "orderID": 1758862212257,
+      "userID": 1,
+      "restID": 3,
+      "items": [
+        {
+          "itemID": 1,
+          "name": "Shahi Paneer",
+          "price": 100,
+          "quantity": 1,
+          "image": "MenuItems/shahi paneer.jpg"
+        },
+        {
+          "itemID": 2,
+          "name": "Rogan Josh",
+          "price": 120,
+          "quantity": 1,
+          "image": "MenuItems/Rogan Josh.jpg"
+        }
+      ],
+      "totalAmount": 259.6,
+      "totalItems": 2,
+      "status": "placed",
+      "deliveryAddress": {
+        "type": "Home",
+        "fullAddress": "123 Main St, Springfield",
+        "isDefault": true
+      },
+      "paymentMethod": 2,
+      "orderDate": "2025-09-26T04:50:12.257Z"
     }
   ],
   "restaurants": [

@@ -12,7 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -22,6 +22,7 @@ import { RestaurantSignupComponent } from './restaurant-signup/restaurant-signup
 import { RestaurantNavbarComponent } from './restaurant-navbar/restaurant-navbar.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 
 @NgModule({
@@ -54,7 +55,9 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

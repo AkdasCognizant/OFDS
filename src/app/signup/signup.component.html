@@ -60,7 +60,7 @@
             <a [routerLink]="['/login']" id="login">Login</a>
           </div>
 
-          <!-- Feedback Message -->
+          <!-- Feedback Message --> 
           <div *ngIf="message" class="mt-3 text-center">
             <p [ngClass]="message.includes('successfully') ? 'text-success' : 'text-danger'">{{ message }}</p>
           </div>
